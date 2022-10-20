@@ -1,0 +1,10 @@
+.ant-layout-sider-children {
+  padding-top: 25px;
+  min-height: calc(100vh - 25px);
+
+  button {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+  }
+}

@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
+
+.ant-layout-sider-children {
+  background-color: #202020;
+  padding-top: 35px;
+  height: calc(100vh - 35px);
+  .btn-collapse{
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    z-index: 1;
+  }
+}

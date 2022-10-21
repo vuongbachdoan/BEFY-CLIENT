@@ -1,36 +1,48 @@
 <nz-sider class="wrapper">
+  <div class="d-flex flex-col align-center sidebar-logo-wrapper">
+    <img [ngClass]="isCollapsed ? 'logo logo-sm' : 'logo logo-lg'" src="../../../../assets/images/logo_colored.png" alt="" srcset="">
+    <h3 nz-typography [nzContent]="isCollapsed ? '' : 'Befy'" class="title-light"></h3>
+  </div>
   <button class="btn-collapse" nz-button nzType="primary" (click)="toggleCollapsed()">
-    <span nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+    <span nz-icon [nzType]="isCollapsed ? 'right' : 'left'"></span>
   </button>
-  <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+  <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed" [ngClass]="isCollapsed ? 'sidebar-close' : 'sidebar-open'">
     <li
       nz-menu-item
       nz-tooltip
       nzTooltipPlacement="right"
-      [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+      [nzTooltipTitle]="isCollapsed ? 'Home' : ''"
       nzSelected
     >
-      <span nz-icon nzType="mail"></span>
-      <span>Navigation One</span>
+      <span nz-icon nzType="home"></span>
+      <span>Home</span>
     </li>
-    <li nz-submenu nzTitle="Navigation Two" nzIcon="appstore">
-      <ul>
-        <li nz-menu-item>Option 5</li>
-        <li nz-menu-item>Option 6</li>
-        <li nz-submenu nzTitle="Submenu">
-          <ul>
-            <li nz-menu-item>Option 7</li>
-            <li nz-menu-item>Option 8</li>
-          </ul>
-        </li>
-      </ul>
+    <li
+      nz-menu-item
+      nz-tooltip
+      nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? 'Discover' : ''"
+    >
+      <span nz-icon nzType="compass"></span>
+      <span>Discover</span>
     </li>
-    <li nz-submenu nzTitle="Navigation Three" nzIcon="setting">
-      <ul>
-        <li nz-menu-item>Option 9</li>
-        <li nz-menu-item>Option 10</li>
-        <li nz-menu-item>Option 11</li>
-      </ul>
+    <li
+    nz-menu-item
+    nz-tooltip
+    nzTooltipPlacement="right"
+    [nzTooltipTitle]="isCollapsed ? 'Trending' : ''"
+  >
+    <span nz-icon nzType="stock"></span>
+    <span>Trending</span>
+  </li>
+    <li
+      nz-menu-item
+      nz-tooltip
+      nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? 'Favorite' : ''"
+    >
+      <span nz-icon nzType="heart"></span>
+      <span>Favorite</span>
     </li>
   </ul>
 </nz-sider>

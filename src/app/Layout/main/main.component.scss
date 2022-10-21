@@ -1,4 +1,19 @@
 nz-layout {
   flex-direction: row;
   height: 100%;
+  background: rgb(83, 53, 149);
+  background: linear-gradient(
+    0deg,
+    rgb(18, 3, 54) 0%,
+    rgba(83, 53, 149, 1) 35%
+  );
+}
+
+app-sidebar {
+  background-color: #442C76;
+  padding: 0px 25px;
+}
+
+app-body {
+  flex-grow: 1;
 }

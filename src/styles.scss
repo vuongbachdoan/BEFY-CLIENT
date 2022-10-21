@@ -1,14 +1,143 @@
-@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import url("~ng-zorro-antd/ng-zorro-antd.min.css");
+@import url("./app//Styles//app-theme.styles.scss");
 
-
-.ant-layout-sider-children {
-  background-color: #202020;
-  padding-top: 35px;
-  height: calc(100vh - 35px);
-  .btn-collapse{
-    position: absolute;
-    top: 35px;
-    right: 0px;
-    z-index: 1;
+nz-sider {
+  .ant-layout-sider-children {
+    background: transparent;
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    padding-top: 65px;
+    .btn-collapse {
+      position: absolute;
+      top: 15px;
+      right: 0px;
+      z-index: 1;
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+      border: 0px;
+      border-radius: 5px;
+      background-color: #202020;
+      color: #ccc;
+      cursor: pointer;
+    }
   }
+  .anticon > svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected,
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected,
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+  // background-image: linear-gradient(45deg, rgb(255, 20, 60), rgb(32, 136, 255));
+  // -webkit-text-fill-color: transparent;
+  // -webkit-background-clip: text;
+
+}
+
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  color: rgba(255, 255, 255, 0.65);
+  background: transparent;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected,
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected,
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: #533595;
+  border-radius: 5px;
+}
+
+.ant-menu-dark .ant-menu-item-active,
+.ant-menu-dark .ant-menu-item:hover,
+.ant-menu-dark .ant-menu-submenu-active,
+.ant-menu-dark .ant-menu-submenu-open,
+.ant-menu-dark .ant-menu-submenu-selected,
+.ant-menu-dark .ant-menu-submenu-title:hover {
+  color: #fff;
+  background-color: #533595;
+  border-radius: 5px;
+}
+
+// nz-input-group {
+//   background-color: transparent;
+//   border-radius: 20px;
+//   overflow: hidden;
+//   height: 40px;
+//   margin-bottom: 25px;
+
+//   .ant-input .ng-star-inserted {
+//     &:focus {
+//       border: 0px;
+//     }
+//   }
+//   .ant-input,
+//   .ant-input-affix-wrapper {
+//     height: 40px;
+//     background-color: #533595;
+//     border: 0px;
+//     color: #fff;
+//   }
+//   .ant-input-group-addon {
+//     background-color: #533595;
+//     .ant-btn,
+//     .ant-btn-primary {
+//       width: 40px;
+//       height: 40px;
+//       border-radius: 20px;
+//       overflow: hidden;
+//       border: 0px;
+//       background-color: transparent;
+//       color: #fff;
+//     }
+//   }
+// }
+
+// .ant-input-group .ant-input:focus,
+// .ant-input-group .ant-input:hover {
+//   border-right-width: 0px;
+// }
+
+// .ant-input-search .ant-input:focus,
+// .ant-input-search .ant-input:hover {
+//   border-color: transparent;
+// }
+
+.ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+  width: 40px;
+}
+
+.my-center {
+  display: flex;
+  justify-content: center;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.title-light {
+  background-image: linear-gradient(45deg, rgb(255, 65, 97), rgb(44, 143, 255));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }

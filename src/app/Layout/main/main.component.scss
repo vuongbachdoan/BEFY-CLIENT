@@ -1,7 +1,6 @@
 nz-layout {
   flex-direction: row;
   height: 100%;
-  background: rgb(83, 53, 149);
   background: linear-gradient(
     0deg,
     rgb(18, 3, 54) 0%,
@@ -10,7 +9,8 @@ nz-layout {
 }
 
 app-sidebar {
-  background-color: #442C76;
+  background-color: #00000030;
+  filter: blur(.45);
   padding: 0px 25px;
 }
 

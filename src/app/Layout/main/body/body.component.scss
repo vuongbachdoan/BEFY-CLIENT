@@ -1,11 +1,89 @@
-.body {
+nz-layout {
   min-height: 100vh;
+  background-color: transparent;
+  nz-header {
+    background-color: transparent;
+    padding-top: ́px;
+    height: 65px;
+    .btns-nav > .anticon {
+      width: 22px;
+      height: 22px;
+      font-size: 22px;
+      transition: 0.2s linear;
+    }
+    .btn_page-goto {
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn_inactive {
+      color: #bbb;
+      transition: 0.2s;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
 }
 
-nz-header{
+.search-field {
+  border-radius: 20px;
+  input {
+    background-color: #ffffff20;
+    border: 0px;
+    height: 32px;
+    border-radius: 20px;
+    &:focus {
+      border: 0px;
+      border-color: transparent;
+    }
+  }
+  button {
+    border: 0px;
+    border-radius: 32px;
+    background-color: #202020;
+    .anticon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+}
+
+nz-footer {
   background-color: transparent;
 }
 
-.ant-layout {
-  background-color: transparent;
+vm-player[audio] {
+  --vm-controls-bg: #00000030;
+  padding: 25px 50px;
+}
+
+vm-playback-control {
+  --vm-control-icon-size : 45px;
+  button {
+    border: 0px;
+  }
+}
+
+vm-control-group {
+  padding: 25px 50px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  column-gap: 5px;
+  img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
 }

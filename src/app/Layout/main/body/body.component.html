@@ -1,12 +1,85 @@
-  <nz-layout class="body">
-    <nz-header>
-      <span nz-icon nzType="left-square" nzTheme="outline"></span>
-      <span nz-icon nzType="right-square" nzTheme="outline"></span>
-      <div>
-        <span nz-icon nzType="search" nzTheme="outline"></span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">Content</div>
-    </nz-content>
-  </nz-layout>
+<nz-layout class="body">
+  <nz-header class="d-flex align-center justify-between">
+    <div class="d-flex align-center btns-nav">
+      <span class="btn_page-goto " nz-icon nzType="left" nzTheme="outline"></span>
+      <span class="btn_page-goto btn_inactive" nz-icon nzType="right" nzTheme="outline"></span>
+    </div>
+
+    <div class="d-flex align-center search-field">
+      <input #searchKeyword nz-input placeholder="Find your interesting..." [(ngModel)]="searchString"/>
+      <button nz-button><span  (click)="requestSearch()" nz-icon nzType="search" nzTheme="outline"></span></button>
+    </div>
+
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <div *ngIf="searchData">
+          <img src={{searchData.data.top.thumbnailM}} alt="" srcset="">
+          <h3>Playlists</h3>
+          <ul>
+            <li *ngFor="let item of searchData.data.playlists">
+              <img src={{item.thumbnailM}} alt="" srcset="">
+            </li>
+          </ul>
+          <h3>Videos</h3>
+          <ul>
+            <li *ngFor="let item of searchData.data.videos">
+              <img src={{item.thumbnailM}} alt="" srcset="">
+            </li>
+          </ul>
+          <h3>Songs</h3>
+          <ul>
+            <li *ngFor="let item of searchData.data.songs">
+              <img src={{item.thumbnailM}} alt="" srcset="" (click)="play(item.encodeId)">
+            </li>
+          </ul>
+          <h3>Artists</h3>
+          <ul>
+            <li *ngFor="let item of searchData.data.artists">
+              <img src={{item.thumbnailM}} alt="" srcset="">
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+    </nz-modal>
+
+  </nz-header>
+  <nz-content>
+    <div class="inner-content">Content</div>
+  </nz-content>
+  <nz-footer>
+    <vm-player theme="dark" style="--vm-player-theme: #e86c8b;">
+      <vm-audio>
+        <source data-src={{songLink}} type="video/mp4" />
+      </vm-audio>
+      <!-- <vm-default-ui></vm-default-ui> -->
+      <vm-ui>
+        <vm-loading-screen></vm-loading-screen>
+        <vm-click-to-play></vm-click-to-play>
+
+        <vm-controls>
+
+          <vm-control-group class="d-flex justify-between">
+            <vm-volume-control></vm-volume-control>
+            <vm-playback-control></vm-playback-control>
+            <vm-settings-control></vm-settings-control>
+          </vm-control-group>
+
+          <vm-control-group>
+            <vm-current-time></vm-current-time>
+            <vm-scrubber-control></vm-scrubber-control>
+            <vm-end-time></vm-end-time>
+          </vm-control-group>
+
+        </vm-controls>
+
+      </vm-ui>
+      <vm-default-settings></vm-default-settings>
+    </vm-player>
+  </nz-footer>
+</nz-layout>
+
+<style>
+  .controls {
+    border-radius: 15px !important;
+  }
+</style>

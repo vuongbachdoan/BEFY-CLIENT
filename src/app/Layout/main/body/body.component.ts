@@ -32,7 +32,6 @@ export class BodyComponent implements OnInit {
      .subscribe(
       res => {
         this.searchData = res
-
       }
      )
   }

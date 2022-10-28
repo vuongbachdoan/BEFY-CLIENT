@@ -29,7 +29,11 @@
           <h3>Songs</h3>
           <ul>
             <li *ngFor="let item of searchData.data.songs">
+<<<<<<< HEAD
               <img src={{item.thumbnailM}} alt="" srcset="">
+=======
+              <img src={{item.thumbnailM}} alt="" srcset="" (click)="play(item.encodeId)">
+>>>>>>> 7485ccfd4a80ff50d7cc3885cfa5f741dfdc8b17
             </li>
           </ul>
           <h3>Artists</h3>

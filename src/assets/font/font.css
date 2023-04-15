@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'SF-Pro Black Italic';
+    src: url('./SFPRODISPLAYBLACKITALIC.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Bold';
+    src: url('./SFPRODISPLAYBOLD.OTF') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'SF-Pro Heavy Italic';
+    src: url('./SFPRODISPLAYHEAVYITALIC.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Light Italic';
+    src: url('./SFPRODISPLAYLIGHTITALIC.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Medium';
+    src: url('./SFPRODISPLAYMEDIUM.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Regular';
+    src: url('./SFPRODISPLAYREGULAR.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Semi Bold';
+    src: url('./SFPRODISPLAYSEMIBOLDITALIC.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Thin Italic';
+    src: url('./SFPRODISPLAYTHINITALIC.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro Ultra Light Italic';
+    src: url('./SFPRODISPLAYULTRALIGHTITALIC.OTF') format('truetype');
+}

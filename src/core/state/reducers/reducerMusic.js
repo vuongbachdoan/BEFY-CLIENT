@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const musicSlice = createSlice({
     name: 'MUSIC',
     initialState: {
+        currentPlaylist: [],
         currentSong: null,
         currentSongDetails: {},
         isSongPlaying: false
@@ -16,8 +17,11 @@ export const musicSlice = createSlice({
         },
         setCurrentSongDetails: (state, action) => {
             state.currentSongDetails = action.payload;
+        },
+        setCurrentPlaylist: (state, action) => {
+            state.currentPlaylist = action.payload;
         }
     }
 });
 
-export const { setSong, setIsSongPlaying, setCurrentSongDetails } = musicSlice.actions;
+export const { setSong, setIsSongPlaying, setCurrentSongDetails, setCurrentPlaylist } = musicSlice.actions;

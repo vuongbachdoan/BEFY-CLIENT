@@ -9,6 +9,7 @@ const Waveform = () => {
     const dispatch = useDispatch();
     const isSongPlaying = useSelector((state) => state.music.isSongPlaying);
     const currentSong = useSelector((state) => state.music.currentSong);
+    const currentPlaylist = useSelector((state) => state.music.currentPlaylist);
     const containerRef = useRef();
     const waveSurferRef = useRef({
         isPlaying: () => false,
@@ -30,6 +31,13 @@ const Waveform = () => {
             waveSurfer.on('ready', () => {
                 waveSurferRef.current = waveSurfer;
             });
+            waveSurfer.on('finish', () =>{
+                dispatch(setIsSongPlaying(false));
+                let currentPos;
+                for(let i = 0; i < currentPlaylist; ++i) {
+                    if(currentSong == currentPlaylist[i].)
+                }
+            })
 
             return () => {
                 waveSurfer.destroy();

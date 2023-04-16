@@ -9,7 +9,7 @@ import { ReactComponent as IconMore } from "../../assets/image/icon_more.svg";
 import { Player } from "../../shared/layout/Player";
 import { Header } from "../../shared/layout/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentSongDetails, setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
+import { setCurrentPlaylist, setCurrentSongDetails, setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -27,8 +27,8 @@ export const App = () => {
         musicService.getChart()
             .then(
                 (res) => {
-                    console.log(res.data.data.data.items);
-                    setTopSongs(res.data.data.data.items)
+                    setTopSongs(res.data.data.data.items);
+                    dispatch(setCurrentPlaylist(res.data.data.data.items));
                 }
             );
     }, []);

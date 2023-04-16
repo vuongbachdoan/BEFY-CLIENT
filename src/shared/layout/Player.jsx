@@ -17,20 +17,31 @@ export const Player = () => {
     const dispatch = useDispatch();
     const isSongPlaying = useSelector((state) => state.music.isSongPlaying);
     const currentSong = useSelector((state) => state.music.currentSong);
+    const currentSongDetails = useSelector((state) => state.music.currentSongDetails);
 
     useEffect(() => {
         console.log(isSongPlaying)
-    }, [isSongPlaying])
+    }, [isSongPlaying]);
+
+    const togglePlaying = (e) => {
+        dispatch(setIsSongPlaying(!isSongPlaying));
+    }
 
     return (
         <Container className="sticky bottom-0 bg-white bg-opacity-90 backdrop-blur-md z-50 py-5 border-t-2">
             <Row>
                 <Col className="player__infor">
                     <User
-                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                        name="Ariana Wattson"
+                        src={currentSongDetails.thumbnail}
+                        name={currentSongDetails.title ?? 'Song Name'}
                     >
-                        <Text>Name of Song</Text>
+                        <Text>
+                            {
+                                currentSongDetails.artistsNames && currentSongDetails.duration ?
+                                `${currentSongDetails.artistsNames} • ${Math.floor(currentSongDetails.duration / 60).toString().padStart(2, '0')}:${(currentSongDetails.duration % 60).toString().padStart(2, '0')}` :
+                                'Artists Name • 00:00'
+                            }
+                        </Text>
                     </User>
                 </Col>
                 <Col className="player__func">
@@ -39,8 +50,8 @@ export const Player = () => {
                         <IconSkipPrev className="icon-sm" />
                         {
                             isSongPlaying ?
-                            <IconPause onClick={() => dispatch(setIsSongPlaying(!isSongPlaying))} /> : 
-                            <IconPlay onClick={() => dispatch(setIsSongPlaying(!isSongPlaying))} />
+                                <IconPause onClick={togglePlaying} /> :
+                                <IconPlay onClick={togglePlaying} />
                         }
                         <IconSkipNext className="icon-sm" />
                         <IconLoop className="icon-sm" />
@@ -57,7 +68,7 @@ export const Player = () => {
             <Container className="pt-3 flex justify-center">
                 {
                     currentSong !== null &&
-                    <Waveform/>
+                    <Waveform />
                 }
             </Container>
         </Container>

@@ -15,28 +15,30 @@ const Waveform = () => {
     });
 
     useEffect(() => {
-        const waveSurfer = WaveSurfer.create({
-            container: containerRef.current,
-            responsive: true,
-            barWidth: 1,
-            barHeight: 1,
-            cursorWidth: 0,
-            height: 20,
-            waveColor: "#CCC",
-            progressColor: "#0F766E"
-        });
-        waveSurfer.load(currentSong);
-        waveSurfer.on('ready', () => {
-            waveSurferRef.current = waveSurfer;
-        });
+        if (currentSong) {
+            const waveSurfer = WaveSurfer.create({
+                container: containerRef.current,
+                responsive: true,
+                barWidth: 1,
+                barHeight: 1,
+                cursorWidth: 0,
+                height: 20,
+                waveColor: "#CCC",
+                progressColor: "#0F766E"
+            });
+            waveSurfer.load(currentSong);
+            waveSurfer.on('ready', () => {
+                waveSurferRef.current = waveSurfer;
+            });
 
-        return () => {
-            waveSurfer.destroy();
-        };
+            return () => {
+                waveSurfer.destroy();
+            };
+        }
     }, [currentSong]);
 
     useEffect(() => {
-        if(isSongPlaying) {
+        if (isSongPlaying ) {
             waveSurferRef.current.playPause();
         }
         dispatch(setIsSongPlaying(waveSurferRef.current.isPlaying()));

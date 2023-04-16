@@ -9,7 +9,7 @@ import { ReactComponent as IconMore } from "../../assets/image/icon_more.svg";
 import { Player } from "../../shared/layout/Player";
 import { Header } from "../../shared/layout/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
+import { setCurrentSongDetails, setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -33,7 +33,9 @@ export const App = () => {
             );
     }, []);
 
-    const fetchAudio = (id) => {
+    const fetchAudio = (id, detailAudio) => {
+        console.log(detailAudio)
+        dispatch(setCurrentSongDetails(detailAudio));
         musicService.getAudio(id)
             .then(
                 (res) => {
@@ -188,7 +190,7 @@ export const App = () => {
                                                 <User
                                                     src={item.thumbnail}
                                                     name={item.title}
-                                                    onClick={() => fetchAudio(item.encodeId)}
+                                                    onClick={() => fetchAudio(item.encodeId, item)}
                                                 />
                                             </Table.Cell>
                                             <Table.Cell>

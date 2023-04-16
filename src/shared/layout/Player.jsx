@@ -10,9 +10,17 @@ import { ReactComponent as IconFavorite } from "../../assets/image/icon_favorite
 import { ReactComponent as IconVolume } from "../../assets/image/icon_volume.svg";
 import Waveform from "./WaveForm";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSongPlaying } from "../../core/state/reducers/reducerMusic";
 
-export const Player = ({ listSongs }) => {
-    const [isPlaying, toggleIsPlaying] = useState(false);
+export const Player = () => {
+    const dispatch = useDispatch();
+    const isSongPlaying = useSelector((state) => state.music.isSongPlaying);
+    const currentSong = useSelector((state) => state.music.currentSong);
+
+    useEffect(() => {
+        console.log(isSongPlaying)
+    }, [isSongPlaying])
 
     return (
         <Container className="sticky bottom-0 bg-white bg-opacity-90 backdrop-blur-md z-50 py-5 border-t-2">
@@ -30,7 +38,9 @@ export const Player = ({ listSongs }) => {
                         <IconShuffle className="icon-sm" />
                         <IconSkipPrev className="icon-sm" />
                         {
-                            isPlaying ? <IconPause onClick={() => toggleIsPlaying(!isPlaying)} /> : <IconPlay onClick={() => toggleIsPlaying(!isPlaying)} />
+                            isSongPlaying ?
+                            <IconPause onClick={() => dispatch(setIsSongPlaying(!isSongPlaying))} /> : 
+                            <IconPlay onClick={() => dispatch(setIsSongPlaying(!isSongPlaying))} />
                         }
                         <IconSkipNext className="icon-sm" />
                         <IconLoop className="icon-sm" />
@@ -46,8 +56,8 @@ export const Player = ({ listSongs }) => {
             </Row>
             <Container className="pt-3 flex justify-center">
                 {
-                    listSongs.length > 0 &&
-                    <Waveform togglePlaying={(val) => toggleIsPlaying(val)} isPlaying={isPlaying} audio={listSongs[0]} />
+                    currentSong !== null &&
+                    <Waveform/>
                 }
             </Container>
         </Container>

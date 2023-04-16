@@ -3,36 +3,17 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "../../shared/layout/Sidebar";
 import { Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Table, User } from '@nextui-org/react';
+import { Table, Text, User } from '@nextui-org/react';
 import { musicService } from "../../shared/services/musicService";
 import { ReactComponent as IconMore } from "../../assets/image/icon_more.svg";
 import { Player } from "../../shared/layout/Player";
 import { Header } from "../../shared/layout/Header";
-
-const listSongs = [
-    {
-        name: 'Despacito',
-        singer: 'Luis Fonsi',
-        cover:
-            'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
-        musicSrc:
-            'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3',
-        // support async fetch music src. eg.
-        // musicSrc: async () => {
-        //   return await fetch('/api')
-        // },
-    },
-    {
-        name: 'Dorost Nemisham',
-        singer: 'Sirvan Khosravi',
-        cover:
-            'https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg',
-        musicSrc:
-            'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3',
-    },
-]
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
 
 export const App = () => {
+    const dispatch = useDispatch();
+    const isSongPlaying = useSelector((state) => state.music.isSongPlaying);
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -52,18 +33,24 @@ export const App = () => {
             );
     }, []);
 
-    const [audio, setAudio] = useState(null);
     const fetchAudio = (id) => {
-        console.log(id)
         musicService.getAudio(id)
             .then(
-                (res) => setAudio(res.data.data.lossless ?? res.data.data['128'] ?? res.data.data['320'])
+                (res) => {
+                    dispatch(
+                        setSong(
+                            res.data.data.lossless ??
+                            res.data.data['128'] ??
+                            res.data.data['320']
+                        )
+                    )
+                }
             )
     }
 
     return (
         <div className="relative min-h-screen lg:flex">
-            <Header isOpen={isOpen} handleOpen={(val) => setIsOpen(val)}/>
+            <Header isOpen={isOpen} handleOpen={(val) => setIsOpen(val)} />
 
             <div onClick={() => setIsOpen(false)} className="fixed inset-0 z-20 transition-opacity bg-black opacity-30 lg:hidden" ></div >
             <Sidebar isOpen={isOpen} />
@@ -175,7 +162,7 @@ export const App = () => {
                     </Swiper>
                 </SwiperWrapper>
 
-                <TableSection style={{position: "relative"}} className="relativegrid grid-cols-1 gap-8 mx-6 bg-white">
+                <TableSection style={{ position: "relative" }} className="relativegrid grid-cols-1 gap-8 mx-6 bg-white">
                     <Table
                         bordered
                         shadow={false}
@@ -185,7 +172,7 @@ export const App = () => {
                             height: "auto",
                             minWidth: "100%",
                         }}
-                        selectionMode="multiple"
+                        selectionMode="single"
                     >
                         <Table.Header>
                             <Table.Column>SONG</Table.Column>
@@ -204,8 +191,12 @@ export const App = () => {
                                                     onClick={() => fetchAudio(item.encodeId)}
                                                 />
                                             </Table.Cell>
-                                            <Table.Cell>{item.artistsNames}</Table.Cell>
-                                            <Table.Cell>{new Date(item.duration * 1000).toISOString().slice(14, 19)}</Table.Cell>
+                                            <Table.Cell>
+                                                <Text onClick={() => fetchAudio(item.encodeId)}>{item.artistsNames}</Text>
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <Text onClick={() => fetchAudio(item.encodeId)}>{new Date(item.duration * 1000).toISOString().slice(14, 19)}</Text>
+                                            </Table.Cell>
                                         </Table.Row>
                                     )
                                 })
@@ -220,11 +211,12 @@ export const App = () => {
                         />
                     </Table>
                 </TableSection>
-                
-                {
-                    audio != null &&
-                    <Player listSongs={[audio]}/>
-                }
+
+                {/* {
+                    isSongPlaying &&
+                    <Player />
+                } */}
+                <Player />
             </main >
         </div >
     );

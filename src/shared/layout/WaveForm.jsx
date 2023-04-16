@@ -2,15 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import WaveSurfer from 'wavesurfer.js';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsSongPlaying, setSong } from '../../core/state/reducers/reducerMusic';
 
-const Waveform = ({ audio, isPlaying, togglePlaying }) => {
+const Waveform = () => {
+    const dispatch = useDispatch();
+    const isSongPlaying = useSelector((state) => state.music.isSongPlaying);
+    const currentSong = useSelector((state) => state.music.currentSong);
     const containerRef = useRef();
     const waveSurferRef = useRef({
         isPlaying: () => false,
     });
 
     useEffect(() => {
-        
         const waveSurfer = WaveSurfer.create({
             container: containerRef.current,
             responsive: true,
@@ -21,7 +25,7 @@ const Waveform = ({ audio, isPlaying, togglePlaying }) => {
             waveColor: "#CCC",
             progressColor: "#0F766E"
         });
-        waveSurfer.load(audio);
+        waveSurfer.load(currentSong);
         waveSurfer.on('ready', () => {
             waveSurferRef.current = waveSurfer;
         });
@@ -29,14 +33,14 @@ const Waveform = ({ audio, isPlaying, togglePlaying }) => {
         return () => {
             waveSurfer.destroy();
         };
-    }, [audio]);
+    }, [currentSong]);
 
     useEffect(() => {
-        if(isPlaying) {
+        if(isSongPlaying) {
             waveSurferRef.current.playPause();
         }
-        togglePlaying(waveSurferRef.current.isPlaying());
-    }, [isPlaying])
+        dispatch(setIsSongPlaying(waveSurferRef.current.isPlaying()));
+    }, [isSongPlaying])
 
     return (
         <WaveSurferWrap>

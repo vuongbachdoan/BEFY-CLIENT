@@ -19,11 +19,10 @@ export const Player = () => {
     const currentSong = useSelector((state) => state.music.currentSong);
     const currentSongDetails = useSelector((state) => state.music.currentSongDetails);
 
-    useEffect(() => {
-        console.log(isSongPlaying)
-    }, [isSongPlaying]);
+    const waveRef = useRef(null);
 
-    const togglePlaying = (e) => {
+    const toggleWaveSurfer = () => {
+        waveRef.current.playPause();
         dispatch(setIsSongPlaying(!isSongPlaying));
     }
 
@@ -38,8 +37,8 @@ export const Player = () => {
                         <Text>
                             {
                                 currentSongDetails.artistsNames && currentSongDetails.duration ?
-                                `${currentSongDetails.artistsNames} • ${Math.floor(currentSongDetails.duration / 60).toString().padStart(2, '0')}:${(currentSongDetails.duration % 60).toString().padStart(2, '0')}` :
-                                'Artists Name • 00:00'
+                                    `${currentSongDetails.artistsNames} • ${Math.floor(currentSongDetails.duration / 60).toString().padStart(2, '0')}:${(currentSongDetails.duration % 60).toString().padStart(2, '0')}` :
+                                    'Artists Name • 00:00'
                             }
                         </Text>
                     </User>
@@ -49,9 +48,9 @@ export const Player = () => {
                         <IconShuffle className="icon-sm" />
                         <IconSkipPrev className="icon-sm" />
                         {
-                            isSongPlaying ?
-                                <IconPause onClick={togglePlaying} /> :
-                                <IconPlay onClick={togglePlaying} />
+                            currentSong && isSongPlaying ?
+                                <IconPause onClick={toggleWaveSurfer} /> :
+                                <IconPlay onClick={toggleWaveSurfer} />
                         }
                         <IconSkipNext className="icon-sm" />
                         <IconLoop className="icon-sm" />
@@ -68,7 +67,7 @@ export const Player = () => {
             <Container className="pt-3 flex justify-center">
                 {
                     currentSong !== null &&
-                    <Waveform />
+                    <Waveform waveRef={waveRef} />
                 }
             </Container>
         </Container>

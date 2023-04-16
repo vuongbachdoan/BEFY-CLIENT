@@ -9,7 +9,7 @@ import { ReactComponent as IconMore } from "../../assets/image/icon_more.svg";
 import { Player } from "../../shared/layout/Player";
 import { Header } from "../../shared/layout/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPlaylist, setCurrentSongDetails, setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
+import { setCurrentPlaylist, setCurrentSongDetails, setCurrentSongIndex, setIsSongPlaying, setSong } from "../../core/state/reducers/reducerMusic";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -33,8 +33,9 @@ export const App = () => {
             );
     }, []);
 
-    const fetchAudio = (id, detailAudio) => {
-        console.log(detailAudio)
+    const fetchAudio = (id, detailAudio, index) => {
+        dispatch(setIsSongPlaying(true));
+        dispatch(setCurrentSongIndex(index));
         dispatch(setCurrentSongDetails(detailAudio));
         musicService.getAudio(id)
             .then(
@@ -183,21 +184,21 @@ export const App = () => {
                         </Table.Header>
                         <Table.Body>
                             {
-                                topSongs.map((item) => {
+                                topSongs.map((item, index) => {
                                     return (
                                         <Table.Row key={item.encodeId}>
                                             <Table.Cell>
                                                 <User
                                                     src={item.thumbnail}
                                                     name={item.title}
-                                                    onClick={() => fetchAudio(item.encodeId, item)}
+                                                    onClick={() => fetchAudio(item.encodeId, item, index)}
                                                 />
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text onClick={() => fetchAudio(item.encodeId)}>{item.artistsNames}</Text>
+                                                <Text onClick={() => fetchAudio(item.encodeId, item, index)}>{item.artistsNames}</Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text onClick={() => fetchAudio(item.encodeId)}>{new Date(item.duration * 1000).toISOString().slice(14, 19)}</Text>
+                                                <Text onClick={() => fetchAudio(item.encodeId, item, index)}>{new Date(item.duration * 1000).toISOString().slice(14, 19)}</Text>
                                             </Table.Cell>
                                         </Table.Row>
                                     )

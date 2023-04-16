@@ -5,6 +5,7 @@ export const musicSlice = createSlice({
     initialState: {
         currentPlaylist: [],
         currentSong: null,
+        currentSongIndex: null,
         currentSongDetails: {},
         isSongPlaying: false
     },
@@ -20,8 +21,11 @@ export const musicSlice = createSlice({
         },
         setCurrentPlaylist: (state, action) => {
             state.currentPlaylist = action.payload;
+        },
+        setCurrentSongIndex: (state, action) => {
+            state.currentSongIndex = action.payload;
         }
     }
 });
 
-export const { setSong, setIsSongPlaying, setCurrentSongDetails, setCurrentPlaylist } = musicSlice.actions;
+export const { setSong, setIsSongPlaying, setCurrentSongDetails, setCurrentPlaylist, setCurrentSongIndex } = musicSlice.actions;

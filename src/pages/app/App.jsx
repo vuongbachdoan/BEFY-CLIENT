@@ -169,7 +169,7 @@ export const App = () => {
                     <Table
                         bordered
                         shadow={false}
-                        color="secondary"
+                        color="success"
                         aria-label="Example pagination  table"
                         css={{
                             height: "auto",
@@ -211,14 +211,10 @@ export const App = () => {
                             align="center"
                             rowsPerPage={10}
                             onPageChange={(page) => console.log({ page })}
+                            color={"success"}
                         />
                     </Table>
                 </TableSection>
-
-                {/* {
-                    isSongPlaying &&
-                    <Player />
-                } */}
                 <Player />
             </main >
         </div >

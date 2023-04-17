@@ -21,9 +21,13 @@ export const Player = () => {
 
     const waveRef = useRef(null);
 
-    const toggleWaveSurfer = () => {
+    const toggleWaveSurfer = (e) => {
         waveRef.current.playPause();
         dispatch(setIsSongPlaying(!isSongPlaying));
+    }
+
+    const handleVolumeChange = (e) => {
+        waveRef.current.setVolume(e.target.value / 100);
     }
 
     return (
@@ -33,6 +37,7 @@ export const Player = () => {
                     <User
                         src={currentSongDetails.thumbnail}
                         name={currentSongDetails.title ?? 'Song Name'}
+                        className="animate-rotate"
                     >
                         <Text>
                             {
@@ -61,6 +66,14 @@ export const Player = () => {
                         <IconPlaylist className="icon-sm" />
                         <IconFavorite className="icon-sm" />
                         <IconVolume className="icon-sm" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="1"
+                            defaultValue="100"
+                            onChange={handleVolumeChange}
+                        />
                     </Row>
                 </Col>
             </Row>

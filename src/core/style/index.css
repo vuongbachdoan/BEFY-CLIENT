@@ -17,20 +17,12 @@ body {
 }
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --nextui--paginationColor: #0F766E !important;
 }
 
 a {
@@ -153,4 +145,18 @@ button:focus-visible {
 /* style for player */
 .icon-sm {
   height: 30px;
+}
+
+.animate-rotate img {
+  animation: animate-rotate 5s linear infinite;
+}
+
+@keyframes animate-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -14,4 +14,7 @@ Hi! I'm **Bach Doan Vuong**. Wellcome to next my project.
     git clone https://github.com/vbachdoan/BEFY-CLIENT.git
     npm install
     npm start
+
+### To run with different dependencies
     
+    npx env-cmd -e production npm start

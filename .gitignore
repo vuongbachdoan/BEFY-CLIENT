@@ -24,5 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # others
+.env
+.env.js
+.env.json
 .env-cmdrc
 befy.pem
